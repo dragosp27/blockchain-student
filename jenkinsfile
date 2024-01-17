@@ -2,15 +2,11 @@ pipeline {
     agent {
         docker {
             image 'dragospetre2707/blockchain-laboratory:0.1'
+            args '-u root --privileged'
         }
     }
 
     stages {
-        stage('Setup') {
-            steps {
-                sh 'whoami'
-            }
-        }
         stage('Observers') {
             steps {
                 echo 'Observers'
@@ -64,7 +60,7 @@ pipeline {
                 script {
                     sh '''
                         ./variable.sh
-                        echo sudo mxpy --verbose contract query $SC_ADDRESS_FULL --function="getSum" --proxy=$PROXY
+                        mxpy --verbose contract query $SC_ADDRESS_FULL --function="getSum" --proxy=$PROXY
                     '''
                 }
             }
