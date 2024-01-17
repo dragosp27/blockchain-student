@@ -59,8 +59,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        chmod +x ./variables.sh
-                        ./variables.sh
+                        export PROXY=$(cat variables | grep PROXY | cut -d "=" -f2)
+                        export SC_ADDRESS=$(cat variables | grep SC_ADDRESS | cut -d "=" -f2)
                         mxpy --verbose contract query $SC_ADDRESS --function="getSum" --proxy=$PROXY
                     '''
                 }
