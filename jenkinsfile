@@ -104,7 +104,6 @@ pipeline {
                             export SC_ADDRESS=$(cat variables | grep SC_ADDRESS | cut -d "=" -f2)
                             mxpy --verbose contract query $SC_ADDRESS --function="getSum" --proxy=$PROXY
                         '''
-                        env.succes = env.succes + 1
                     }
                 }
             }
