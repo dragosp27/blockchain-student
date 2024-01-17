@@ -59,8 +59,9 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        chmod +x ./variables.sh
                         ./variables.sh
-                        mxpy --verbose contract query $SC_ADDRESS_FULL --function="getSum" --proxy=$PROXY
+                        mxpy --verbose contract query $SC_ADDRESS --function="getSum" --proxy=$PROXY
                     '''
                 }
             }
