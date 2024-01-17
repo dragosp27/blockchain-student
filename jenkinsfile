@@ -7,76 +7,137 @@ pipeline {
     }
 
     stages {
+        env.succes = 0
+
         stage('Observers') {
             steps {
-                echo 'Observers'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Observers'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Wallet') {
             steps {
-                echo 'Wallet'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Wallet'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('First Transaction') {
             steps {
-                echo 'First Transaction'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'First Transaction'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Create ESDT Token') {
             steps {
-                echo 'Create ESDT Token'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Create ESDT Token'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Send Tokens') {
             steps {
-                echo 'Send Tokens'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Send Tokens'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Swap Tokens') {
             steps {
-                echo 'Swap Tokens'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Swap Tokens'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Peer-to-Peer') {
             steps {
-                echo 'Peer-to-Peer'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Peer-to-Peer'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Deploy Smart Contract') {
             steps {
-                echo 'Deploy Smart Contract'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Deploy Smart Contract'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Call Smart Contract') {
             steps {
-                script {
-                    sh '''
-                        export PROXY=$(cat variables | grep PROXY | cut -d "=" -f2)
-                        export SC_ADDRESS=$(cat variables | grep SC_ADDRESS | cut -d "=" -f2)
-                        mxpy --verbose contract query $SC_ADDRESS --function="getSum" --proxy=$PROXY
-                    '''
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        sh '''
+                            export PROXY=$(cat variables | grep PROXY | cut -d "=" -f2)
+                            export SC_ADDRESS=$(cat variables | grep SC_ADDRESS | cut -d "=" -f2)
+                            mxpy --verbose contract query $SC_ADDRESS --function="getSum" --proxy=$PROXY
+                        '''
+                        env.succes = env.succes + 1
+                    }
                 }
             }
         }
 
         stage('Create Fungible Token') {
             steps {
-                echo 'Create Fungible Token'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Create Fungible Token'
+                        sh 'exit 1'
+                    }
+                }
             }
         }
 
         stage('Create NFT') {
             steps {
-                echo 'Create NFT'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    script {
+                        echo 'Create NFT'
+                        sh 'exit 1'
+                    }
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            currentBuild.description = env.succes.toString() + "/11\n"
         }
     }
 }
