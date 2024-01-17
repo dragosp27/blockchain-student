@@ -1,0 +1,75 @@
+pipeline {
+    agent {
+        docker {
+            image 'dragospetre2707/blockchain-laboratory:0.1'
+        }
+    }
+
+    stages {
+        stage('Observers') {
+            steps {
+                echo 'Observers'
+            }
+        }
+
+        stage('Wallet') {
+            steps {
+                echo 'Wallet'
+            }
+        }
+
+        stage('First Transaction') {
+            steps {
+                echo 'First Transaction'
+            }
+        }
+
+        stage('Create ESDT Token') {
+            steps {
+                echo 'Create ESDT Token'
+            }
+        }
+
+        stage('Send Tokens') {
+            steps {
+                echo 'Send Tokens'
+            }
+        }
+
+        stage('Swap Tokens') {
+            steps {
+                echo 'Swap Tokens'
+            }
+        }
+
+        stage('Peer-to-Peer') {
+            steps {
+                echo 'Peer-to-Peer'
+            }
+        }
+
+        stage('Deploy Smart Contract') {
+            steps {
+                echo 'Deploy Smart Contract'
+            }
+        }
+
+        stage('Call Smart Contract') {
+            steps {
+                echo 'Call Smart Contract'
+            }
+        }
+
+        stage('Create Fungible Token') {
+            steps {
+                echo 'Create Fungible Token'
+            }
+        }
+
+        stage('Create NFT') {
+            steps {
+                echo 'Create NFT'
+            }
+        }
+    }
+}
